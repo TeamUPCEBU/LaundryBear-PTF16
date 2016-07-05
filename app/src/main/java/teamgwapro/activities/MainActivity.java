@@ -1,4 +1,4 @@
-package teamgwapro.laundrybear_ptf16;
+package teamgwapro.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
