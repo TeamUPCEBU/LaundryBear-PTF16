@@ -72,9 +72,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginWithCredentials(String usernameInput, String passwordInput){
-        LoginInfo logininfo = new LoginInfo(usernameInput, passwordInput);
-        Log.d(LoginActivity.class.getSimpleName(),logininfo.toString());
-        Call<AuthToken> call = laundryBearAPIService.login(logininfo);
+        LoginInfo loginInfo = new LoginInfo(usernameInput, passwordInput);
+
+        Call<AuthToken> call = laundryBearAPIService.login(loginInfo);
         call.enqueue(new Callback<AuthToken>() {
             @Override
             public void onResponse(Call<AuthToken> call, Response<AuthToken> response) {
@@ -83,7 +83,11 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(LoginActivity.class.toString() , response.body().toString());
                     CacheManager.storeAuthToken(LoginActivity.this, authToken);
                     Toast.makeText(LoginActivity.this, MESSAGE_WELCOME, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent();
                     finish();
+                } else if (response.code() == 400){
+
                 }
                 Log.e(LoginActivity.class.getSimpleName(), String.valueOf(response.code()));
             }
