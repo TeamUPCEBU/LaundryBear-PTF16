@@ -1,6 +1,4 @@
-package models;
-
-import java.sql.Date;
+package teamgwapro.laundrybear_ptf16.models;
 
 /**
  * Created by coderschool on 7/5/16.
