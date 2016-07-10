@@ -2,37 +2,40 @@ package teamgwapro.laundrybear_ptf16.managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
 import teamgwapro.laundrybear_ptf16.models.AuthToken;
+import teamgwapro.laundrybear_ptf16.models.User;
 
 /**
  * Created by coderschool on 7/7/16.
  */
 public class CacheManager {
 
-    private static final String KEY_AUTH_TOKEN = "authToken";
+    private static final String KEY_USER_INFO = "userInfo";
 
-    public static void storeAuthToken(Context context, AuthToken authToken){
+    public static void storeUserInfo(Context context, User user){
         SharedPreferences sharedPreferences = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(authToken);
+        String json = gson.toJson(user);
 
-        editor.putString(KEY_AUTH_TOKEN, json);
+        editor.putString(KEY_USER_INFO, json);
         editor.apply();
     }
 
-    public static AuthToken retrieveAuthToken(Context context){
+    public static User retrieveUserInfo(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString(KEY_AUTH_TOKEN, null);
-        AuthToken authToken = null;
+        String json = sharedPreferences.getString(KEY_USER_INFO, null);
+        Log.d("", "Hey im heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere!!!!:    "+ json);
+        User user = null;
         if (json != null){
-            authToken = gson.fromJson(json, AuthToken.class);
+            user = gson.fromJson(json, User.class);
         }
-        return authToken;
+        return user;
     }
 
 }

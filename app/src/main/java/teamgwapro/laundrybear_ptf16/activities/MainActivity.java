@@ -8,6 +8,7 @@ import android.util.Log;
 import teamgwapro.laundrybear_ptf16.R;
 import teamgwapro.laundrybear_ptf16.managers.CacheManager;
 import teamgwapro.laundrybear_ptf16.models.AuthToken;
+import teamgwapro.laundrybear_ptf16.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AuthToken authToken = CacheManager.retrieveAuthToken(MainActivity.this);
+        User user = CacheManager.retrieveUserInfo(MainActivity.this);
         Intent intent = new Intent();
-        if (authToken == null){
+        if (user == null){
             intent.setClassName("teamgwapro.laundrybear_ptf16",
                     "teamgwapro.laundrybear_ptf16.activities.LoginActivity");
             Log.d(MainActivity.class.getSimpleName().toString(), "No Log In info.");

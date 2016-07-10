@@ -1,7 +1,9 @@
 package teamgwapro.laundrybear_ptf16.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.BuildConfig;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -25,6 +27,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import teamgwapro.laundrybear_ptf16.models.User;
 import teamgwapro.laundrybear_ptf16.utility.RestClient;
 import teamgwapro.laundrybear_ptf16.utility.WebService;
 
@@ -59,6 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         laundryBearAPIService = new RestClient().getLaundryBearAPIService();
         sign_in.setOnClickListener(new SignInOnClickListener());
+
+        User user = CacheManager.retrieveUserInfo(LoginActivity.this);
+        Intent intent = new Intent();
+        if (user != null){
+            intent.setClassName("teamgwapro.laundrybear_ptf16",
+                    "teamgwapro.laundrybear_ptf16.activities.HomeActivity");
+            startActivity(intent);
+        }
     }
     private class SignInOnClickListener implements View.OnClickListener{
 
@@ -74,26 +85,27 @@ public class LoginActivity extends AppCompatActivity {
     private void loginWithCredentials(String usernameInput, String passwordInput){
         LoginInfo loginInfo = new LoginInfo(usernameInput, passwordInput);
 
-        Call<AuthToken> call = laundryBearAPIService.login(loginInfo);
-        call.enqueue(new Callback<AuthToken>() {
+        Call<User> call = laundryBearAPIService.login(loginInfo);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<AuthToken> call, Response<AuthToken> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(response.code() == 200){
-                    AuthToken authToken = response.body();
+                    User user = response.body();
                     Log.d(LoginActivity.class.toString() , response.body().toString());
-                    CacheManager.storeAuthToken(LoginActivity.this, authToken);
+                    CacheManager.storeUserInfo(LoginActivity.this, user);
                     Toast.makeText(LoginActivity.this, MESSAGE_WELCOME, Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 } else if (response.code() == 400){
-
+                    Toast.makeText(LoginActivity.this, MESSAGE_FAILED, Toast.LENGTH_SHORT).show();
                 }
                 Log.e(LoginActivity.class.getSimpleName(), String.valueOf(response.code()));
             }
 
             @Override
-            public void onFailure(Call<AuthToken> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.e(LoginActivity.class.getSimpleName(), "Login Failure" + t);
             }
         });
