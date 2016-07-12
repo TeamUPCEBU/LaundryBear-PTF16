@@ -13,8 +13,31 @@ public class Transaction {
     private String barangay;
     private String street;
     private String building;
+    private String shop;
     private int fees;
     private int price;
+    private int id;
+
+
+
+    //trial constructor, delete when api is done
+    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, int price){
+        this.id = id;
+        this.status = status;
+        this.requestDate = requestDate;
+        this.deliveryDate = deliveryDate;
+        this.fees = fees;
+        this.price = price;
+        this.shop = shop;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getPaws() {
         return paws;
@@ -102,5 +125,13 @@ public class Transaction {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getShop() {
+        return shop;
+    }
+
+    public void setShop(String shop) {
+        this.shop = shop;
     }
 }

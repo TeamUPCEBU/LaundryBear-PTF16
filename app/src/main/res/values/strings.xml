@@ -16,4 +16,7 @@
         completions."
     </string>
     <string name="laundry_logo">LaundryBear.INC</string>
+
+    <!-- Strings for Buttons-->
+    <string name="order_button_label">Make Order</string>
 </resources>

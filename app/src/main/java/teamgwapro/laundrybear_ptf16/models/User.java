@@ -103,4 +103,8 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getAddress(){
+        return this.building + " "+ this.street+ " "+this.barangay+", "+this.city+", "+this.province;
+    }
 }
