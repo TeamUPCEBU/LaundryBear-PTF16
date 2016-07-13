@@ -15,6 +15,7 @@ import java.util.List;
 import teamgwapro.laundrybear_ptf16.R;
 import teamgwapro.laundrybear_ptf16.adapters.TransactionsAdapter;
 import teamgwapro.laundrybear_ptf16.managers.CacheManager;
+import teamgwapro.laundrybear_ptf16.models.AuthToken;
 import teamgwapro.laundrybear_ptf16.models.Transaction;
 import teamgwapro.laundrybear_ptf16.models.User;
 import butterknife.ButterKnife;
@@ -39,11 +40,13 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //gets userinfo from sharedpreferences
         User user = CacheManager.retrieveUserInfo(HomeActivity.this);
+        AuthToken authToken = new AuthToken();
+        authToken.setToken(user.getToken());
         generateTransacs();
-        displayUserTransactions(user);
+        displayUserTransactions(authToken);
     }
     //display user info in homeactivity
-    private void displayUserTransactions(User user){
+    private void displayUserTransactions(AuthToken authToken){
         transac_list.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(HomeActivity.this);
         transac_list.setLayoutManager(llm);
@@ -59,10 +62,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private void generateTransacs(){
         listOfTransactions = new ArrayList<>();
-        listOfTransactions.add(new Transaction(1,1,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,2));
-        listOfTransactions.add(new Transaction(2,2,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",3,1));
-        listOfTransactions.add(new Transaction(3,3,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,2));
-        listOfTransactions.add(new Transaction(4,4,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",2,3));
+        listOfTransactions.add(new Transaction(1,1,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,"2"));
+        listOfTransactions.add(new Transaction(2,2,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",3,"2"));
+        listOfTransactions.add(new Transaction(3,3,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,"2"));
+        listOfTransactions.add(new Transaction(4,4,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",2,"2"));
     }
 
 }

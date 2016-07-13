@@ -62,14 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         laundryBearAPIService = new RestClient().getLaundryBearAPIService();
         sign_in.setOnClickListener(new SignInOnClickListener());
-
-        User user = CacheManager.retrieveUserInfo(LoginActivity.this);
-        Intent intent = new Intent();
-        if (user != null){
-            intent.setClassName("teamgwapro.laundrybear_ptf16",
-                    "teamgwapro.laundrybear_ptf16.activities.HomeActivity");
-            startActivity(intent);
-        }
     }
     private class SignInOnClickListener implements View.OnClickListener{
 

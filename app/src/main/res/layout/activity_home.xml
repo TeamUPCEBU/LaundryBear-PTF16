@@ -10,31 +10,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="teamgwapro.laundrybear_ptf16.activities.HomeActivity"
     android:orientation="vertical">
-    <android.support.v7.widget.CardView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/profilecard"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardBackgroundColor="@color/colorSecondary">
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="300px"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/laundry_logo"
-            android:src="@drawable/laundrybearlogo"
-            android:scaleType="fitCenter"
-            android:layout_gravity="center_horizontal"/>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.RecyclerView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/transac_list">
-    </android.support.v7.widget.RecyclerView>
-    <android.support.v7.widget.AppCompatButton
-        android:layout_height="wrap_content"
-        android:layout_width="300px"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/order_button"
-        android:text="@string/order_button_label"
-        />
+
 </LinearLayout>

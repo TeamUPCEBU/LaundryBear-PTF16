@@ -38,4 +38,6 @@ public class CacheManager {
         return user;
     }
 
+//    public static storeUserTransactions(Context context, )
+
 }

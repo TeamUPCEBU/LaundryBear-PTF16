@@ -1,5 +1,7 @@
 package teamgwapro.laundrybear_ptf16.models;
 
+import java.util.List;
+
 /**
  * Created by coderschool on 7/5/16.
  */
@@ -15,13 +17,14 @@ public class Transaction {
     private String building;
     private String shop;
     private int fees;
-    private int price;
+    private String price;
     private int id;
+    private List<Order> orders;
 
 
 
     //trial constructor, delete when api is done
-    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, int price){
+    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, String price){
         this.id = id;
         this.status = status;
         this.requestDate = requestDate;
@@ -119,11 +122,11 @@ public class Transaction {
         this.fees = fees;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -133,5 +136,13 @@ public class Transaction {
 
     public void setShop(String shop) {
         this.shop = shop;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

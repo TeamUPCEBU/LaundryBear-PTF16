@@ -18,6 +18,8 @@
                 android:id="@+id/transac_shop"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:text="shop"/>
             <TextView
                 android:layout_height="wrap_content"

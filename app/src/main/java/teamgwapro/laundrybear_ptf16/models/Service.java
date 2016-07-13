@@ -6,7 +6,8 @@ package teamgwapro.laundrybear_ptf16.models;
 public class Service {
     private String name;
     private String description;
-    private int price;
+    private String price;
+    private int id;
 
     public String getName() {
         return name;
@@ -24,11 +25,19 @@ public class Service {
         description = description;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

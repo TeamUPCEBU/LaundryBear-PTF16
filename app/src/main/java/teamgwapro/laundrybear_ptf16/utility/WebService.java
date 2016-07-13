@@ -9,6 +9,7 @@ import teamgwapro.laundrybear_ptf16.models.LoginResult;
 import teamgwapro.laundrybear_ptf16.models.LoginInfo;
 import retrofit2.Call;
 import retrofit2.http.Header;
+import teamgwapro.laundrybear_ptf16.models.Transaction;
 import teamgwapro.laundrybear_ptf16.models.User;
 
 /**
@@ -22,4 +23,6 @@ public interface WebService {
     @POST("token-auth")
     Call<User> login(@Body LoginInfo logininfo);
 
+    @GET("transactions")
+    Call<Transaction> getTransaction(@Body AuthToken authToken);
 }
