@@ -12,15 +12,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import teamgwapro.laundrybear_ptf16.R;
 import teamgwapro.laundrybear_ptf16.adapters.TransactionsAdapter;
 import teamgwapro.laundrybear_ptf16.managers.CacheManager;
+import teamgwapro.laundrybear_ptf16.models.AuthToken;
 import teamgwapro.laundrybear_ptf16.models.Transaction;
+import teamgwapro.laundrybear_ptf16.models.TransactionList;
 import teamgwapro.laundrybear_ptf16.models.User;
 import butterknife.ButterKnife;
 import butterknife.Bind;
 import butterknife.BindString;
-
+import teamgwapro.laundrybear_ptf16.utility.RestClient;
+import teamgwapro.laundrybear_ptf16.utility.WebService;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -30,18 +36,47 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.transac_list)
     RecyclerView transac_list;
 
+    //needed for the use of webservice
+    private WebService laundryBearAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        laundryBearAPIService = new RestClient().getLaundryBearAPIService();
         ButterKnife.bind(this);
         //gets userinfo from sharedpreferences
         User user = CacheManager.retrieveUserInfo(HomeActivity.this);
-        generateTransacs();
+        AuthToken authToken = new AuthToken();
+        authToken.setToken(user.getToken());
         displayUserTransactions(user);
     }
+    //backend happens here
+    public void retrieveTransactions(AuthToken authToken){
+        Call<TransactionList> call = laundryBearAPIService.getTransactions(authToken);
+        call.enqueue(new Callback<TransactionList>() {
+            @Override
+            public void onResponse(Call<TransactionList> call, Response<TransactionList> response) {
+                if(response.code() == 200){
+                    TransactionList transactionList = response.body();
+                    CacheManager.storeUserTransactions(HomeActivity.this,transactionList);
+                } else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TransactionList> call, Throwable t) {
+                Log.d("","No Transactions");
+            }
+        });
+    }
+
+
+    //temp list for trials only
+    private List<Transaction> listOfTransactions;
+
+
     //display user info in homeactivity
     private void displayUserTransactions(User user){
         transac_list.setHasFixedSize(true);
@@ -52,17 +87,4 @@ public class HomeActivity extends AppCompatActivity {
         Log.d("", Integer.toString(transactionsAdapter.getItemCount()));
         transac_list.setAdapter(new TransactionsAdapter(listOfTransactions));
     }
-
-
-    //temp list for trials only
-    private List<Transaction> listOfTransactions;
-
-    private void generateTransacs(){
-        listOfTransactions = new ArrayList<>();
-        listOfTransactions.add(new Transaction(1,1,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,2));
-        listOfTransactions.add(new Transaction(2,2,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",3,1));
-        listOfTransactions.add(new Transaction(3,3,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",1,2));
-        listOfTransactions.add(new Transaction(4,4,"Laundry Shop","Aug 11, 2013", "Aug 12, 2013",2,3));
-    }
-
 }

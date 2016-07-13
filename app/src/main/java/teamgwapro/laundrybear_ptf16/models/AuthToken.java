@@ -14,8 +14,5 @@ public class AuthToken {
         this.token = token;
     }
 
-    public String genPostToken(){
-        return "token " + token;
-    }
 }
 

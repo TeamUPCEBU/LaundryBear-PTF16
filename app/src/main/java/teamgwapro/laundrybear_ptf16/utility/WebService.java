@@ -9,6 +9,7 @@ import teamgwapro.laundrybear_ptf16.models.LoginResult;
 import teamgwapro.laundrybear_ptf16.models.LoginInfo;
 import retrofit2.Call;
 import retrofit2.http.Header;
+import teamgwapro.laundrybear_ptf16.models.TransactionList;
 import teamgwapro.laundrybear_ptf16.models.User;
 
 /**
@@ -19,7 +20,9 @@ public interface WebService {
     String BASE_URL = "http://10.48.32.48:8000/api/";
     String AUTH_TOKEN = "authorization";
 
-    @POST("token-auth")
+    @POST("login")
     Call<User> login(@Body LoginInfo logininfo);
 
+    @GET("transactions/")
+    Call<TransactionList> getTransactions(@Body AuthToken authToken);
 }

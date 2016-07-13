@@ -1,9 +1,12 @@
 package teamgwapro.laundrybear_ptf16.models;
 
+import java.util.List;
+
 /**
  * Created by coderschool on 7/5/16.
  */
 public class Transaction {
+    private int id;
     private int paws;
     private int status;
     private String requestDate;
@@ -13,22 +16,21 @@ public class Transaction {
     private String barangay;
     private String street;
     private String building;
-    private String shop;
+    private String price;
+    private int client;
+    private List<Order> orderList;
     private int fees;
-    private int price;
-    private int id;
 
 
 
     //trial constructor, delete when api is done
-    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, int price){
+    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, String price){
         this.id = id;
         this.status = status;
         this.requestDate = requestDate;
         this.deliveryDate = deliveryDate;
         this.fees = fees;
         this.price = price;
-        this.shop = shop;
     }
 
     public int getId() {
@@ -119,19 +121,27 @@ public class Transaction {
         this.fees = fees;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public String getShop() {
-        return shop;
+    public int getClient() {
+        return client;
     }
 
-    public void setShop(String shop) {
-        this.shop = shop;
+    public void setClient(int client) {
+        this.client = client;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }
