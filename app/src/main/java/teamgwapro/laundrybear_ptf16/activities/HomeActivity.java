@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
     //needed for the use of webservice
     private WebService laundryBearAPIService;
+    private TransactionList transactionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class HomeActivity extends AppCompatActivity {
         User user = CacheManager.retrieveUserInfo(HomeActivity.this);
         AuthToken authToken = new AuthToken();
         authToken.setToken(user.getToken());
-        displayUserTransactions(user);
+        retrieveTransactions(authToken);
+        transactionList = CacheManager.retrieveTransactionList(HomeActivity.this);
+        displayUserTransactions(transactionList.getTransactionList());
     }
     //backend happens here
     public void retrieveTransactions(AuthToken authToken){
@@ -61,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
                     TransactionList transactionList = response.body();
                     CacheManager.storeUserTransactions(HomeActivity.this,transactionList);
                 } else{
-
+                    Log.e("","Error: "+ response.code());
                 }
             }
 
@@ -74,17 +78,16 @@ public class HomeActivity extends AppCompatActivity {
 
 
     //temp list for trials only
-    private List<Transaction> listOfTransactions;
 
 
     //display user info in homeactivity
-    private void displayUserTransactions(User user){
+    private void displayUserTransactions(List<Transaction> transactionList){
         transac_list.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(HomeActivity.this);
         transac_list.setLayoutManager(llm);
         transac_list.setItemAnimator(new DefaultItemAnimator());
-        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(listOfTransactions);
+        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(transactionList);
         Log.d("", Integer.toString(transactionsAdapter.getItemCount()));
-        transac_list.setAdapter(new TransactionsAdapter(listOfTransactions));
+        transac_list.setAdapter(new TransactionsAdapter(transactionList));
     }
 }

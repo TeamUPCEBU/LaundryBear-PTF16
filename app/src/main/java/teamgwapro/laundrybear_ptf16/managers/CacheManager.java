@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import teamgwapro.laundrybear_ptf16.models.AuthToken;
+import teamgwapro.laundrybear_ptf16.models.Transaction;
 import teamgwapro.laundrybear_ptf16.models.TransactionList;
 import teamgwapro.laundrybear_ptf16.models.User;
 
@@ -48,5 +49,15 @@ public class CacheManager {
 
         editor.putString(KEY_USER_TRANSACTIONS, json);
         editor.apply();
+    }
+
+    public static TransactionList retrieveTransactionList(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(KEY_USER_TRANSACTIONS, null);
+        TransactionList transactionList = null;
+        if (json != null)
+            transactionList = gson.fromJson(json ,TransactionList.class);
+        return transactionList;
     }
 }
