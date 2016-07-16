@@ -8,13 +8,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import teamgwapro.laundrybear_ptf16.managers.CacheManager;
-import teamgwapro.laundrybear_ptf16.models.AuthToken;
-import teamgwapro.laundrybear_ptf16.models.LoginResult;
-import teamgwapro.laundrybear_ptf16.models.LoginInfo;
+import teamgwapro.laundrybear_ptf16.models.*;
 import retrofit2.Call;
 import retrofit2.http.Header;
-import teamgwapro.laundrybear_ptf16.models.TransactionList;
-import teamgwapro.laundrybear_ptf16.models.User;
 
 /**
  * Created by coderschool on 7/7/16.
@@ -28,5 +24,5 @@ public interface WebService {
     Call<User> login(@Body LoginInfo logininfo);
 
     @GET("mytransactions/")
-    Call<TransactionList> getTransactions(@Header("Authorization") String token);
+    Call<Transaction[]> getTransactions(@Header("Authorization") String token);
 }

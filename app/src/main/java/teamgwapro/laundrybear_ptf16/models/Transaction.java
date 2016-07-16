@@ -18,18 +18,19 @@ public class Transaction {
     private String building;
     private String price;
     private int client;
-    private List<Order> orderList;
-    private int fees;
+    private List<Order> orders;
+    private int fee;
+    private String comment;
 
 
 
     //trial constructor, delete when api is done
-    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fees, String price){
+    public Transaction(int id,int status,String shop, String requestDate, String deliveryDate, int fee, String price){
         this.id = id;
         this.status = status;
         this.requestDate = requestDate;
         this.deliveryDate = deliveryDate;
-        this.fees = fees;
+        this.fee = fee;
         this.price = price;
     }
 
@@ -113,12 +114,12 @@ public class Transaction {
         this.building = building;
     }
 
-    public int getFees() {
-        return fees;
+    public int getFee() {
+        return fee;
     }
 
-    public void setFees(int fees) {
-        this.fees = fees;
+    public void setFee(int fee) {
+        this.fee = fee;
     }
 
     public String getPrice() {
@@ -137,11 +138,19 @@ public class Transaction {
         this.client = client;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
