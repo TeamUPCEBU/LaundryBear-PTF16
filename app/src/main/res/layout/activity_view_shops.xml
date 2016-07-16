@@ -14,15 +14,17 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:hint="Search Laundry Shops here"
+        android:hint="search laundry shops here"
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true"
         android:id="@+id/searchF"
+        android:textAlignment="center"
+        android:textStyle="italic"
         android:layout_toStartOf="@+id/searchView" />
     <TextView
         android:layout_width="wrap_content"
-        android:text="VIEW LAUNDRY SHOPS"
+        android:text="LAUNDRY SHOPS"
         android:textSize="25dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -66,7 +68,7 @@
         android:id="@+id/listShops"
         android:layout_below="@+id/sortText"
         android:layout_alignStart="@+id/searchF"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="18dp"
         android:choiceMode="singleChoice"
         android:clickable="true"
         android:divider="#5c68d2" />

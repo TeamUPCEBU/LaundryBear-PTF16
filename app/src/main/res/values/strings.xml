@@ -16,4 +16,11 @@
         completions."
     </string>
 
+    <string-array name="sort_by">
+        <item>Name</item>
+        <item>City</item>
+        <item>Barangay</item>
+        <item>Province</item>
+    </string-array>
+
 </resources>

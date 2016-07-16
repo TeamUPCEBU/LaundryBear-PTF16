@@ -15,7 +15,45 @@
         android:textSize="25dp"
         android:textStyle="bold"
         android:text="SHOP NAME"
-        android:id="@+id/textView"
+        android:id="@+id/shopName"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shopName"
+        android:text="Services:"
+        android:textSize="20dp"
+        android:id="@+id/servicesText" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="320dp"
+        android:id="@+id/servicesList"
+        android:layout_below="@+id/servicesText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:choiceMode="singleChoice" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="ORDER"
+        android:id="@+id/orderButton"
+        android:layout_marginEnd="41dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text=" GO BACK "
+        android:id="@+id/button2"
+        android:layout_marginStart="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
