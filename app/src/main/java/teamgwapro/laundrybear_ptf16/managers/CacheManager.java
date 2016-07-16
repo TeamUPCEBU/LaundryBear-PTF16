@@ -33,8 +33,9 @@ public class CacheManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(KEY_USER_INFO, null);
-        Log.d("", "Hey im heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere!!!!:    "+ json);
         User user = null;
+
+       // Log.d("", "Hey im heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere!!!!:    "+ json);
         if (json != null){
             user = gson.fromJson(json, User.class);
         }
@@ -47,6 +48,7 @@ public class CacheManager {
         Gson gson = new Gson();
         String json = gson.toJson(transactionList);
 
+        Log.d("", "Hey im heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere!!!!:    "+ transactionList);
         editor.putString(KEY_USER_TRANSACTIONS, json);
         editor.apply();
     }
@@ -55,6 +57,7 @@ public class CacheManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Preferences", context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(KEY_USER_TRANSACTIONS, null);
+        //Log.d("", "retrieveTransactionList: " + json);
         TransactionList transactionList = null;
         if (json != null)
             transactionList = gson.fromJson(json ,TransactionList.class);

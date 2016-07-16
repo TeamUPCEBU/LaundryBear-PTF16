@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (response.code() == 400){
                     Toast.makeText(LoginActivity.this, MESSAGE_FAILED, Toast.LENGTH_SHORT).show();
                 }
-                Log.e(LoginActivity.class.getSimpleName(), String.valueOf(response.code()));
             }
 
             @Override

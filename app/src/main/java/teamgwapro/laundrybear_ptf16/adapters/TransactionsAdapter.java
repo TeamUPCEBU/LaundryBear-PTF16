@@ -65,7 +65,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         holder.transac_req_date.setText(transaction.getRequestDate());
         holder.transac_ret_date.setText(transaction.getDeliveryDate());
         holder.transac_fee.setText(Integer.toString(transaction.getFees()));
-        holder.transac_shop.setText(transaction.getShop());
+        holder.transac_shop.setText(transaction.getOrderList().get(0).getServiceList().get(0).getLaundryShop().getName());
         holder.transac_status.setText(Integer.toString(transaction.getStatus()));
     }
 

@@ -31,7 +31,7 @@ import teamgwapro.laundrybear_ptf16.utility.WebService;
 
 
 public class HomeActivity extends AppCompatActivity {
-//    butterknife binds
+    //butterknife binds
     @Bind(R.id.order_button)
     Button make_order;
     @Bind(R.id.transac_list)
@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
 
     //needed for the use of webservice
     private WebService laundryBearAPIService;
-    private TransactionList transactionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +46,25 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         laundryBearAPIService = new RestClient().getLaundryBearAPIService();
         ButterKnife.bind(this);
+
+
         //gets userinfo from sharedpreferences
         User user = CacheManager.retrieveUserInfo(HomeActivity.this);
-        AuthToken authToken = new AuthToken();
-        authToken.setToken(user.getToken());
+        String authToken = user.getToken();
         retrieveTransactions(authToken);
-        transactionList = CacheManager.retrieveTransactionList(HomeActivity.this);
-        displayUserTransactions(transactionList.getTransactionList());
+//        Log.d("",authToken);
+
+        TransactionList transactionList = CacheManager.retrieveTransactionList(HomeActivity.this);
+//        Log.d("", transactionList.getTransactionList());
+        //displayUserTransactions(transactionList.getTransactionList());
     }
     //backend happens here
-    public void retrieveTransactions(AuthToken authToken){
+    private void retrieveTransactions(String authToken){
         Call<TransactionList> call = laundryBearAPIService.getTransactions(authToken);
         call.enqueue(new Callback<TransactionList>() {
             @Override
             public void onResponse(Call<TransactionList> call, Response<TransactionList> response) {
+                Log.d("",Integer.toString(response.code()));
                 if(response.code() == 200){
                     TransactionList transactionList = response.body();
                     CacheManager.storeUserTransactions(HomeActivity.this,transactionList);
